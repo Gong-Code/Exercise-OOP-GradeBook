@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace GradeBook
 {
@@ -8,7 +7,7 @@ namespace GradeBook
     {
         private List<double> grades; //Skapar en lista med betyg
 
-        private string Name;
+        public string Name;
 
         public Book(string name) // Stoppar in grades och name i konstruktor
         {
@@ -22,21 +21,61 @@ namespace GradeBook
             result.Average = 0.0;
             result.High = double.MinValue;// skapar variabel för att hitta högsta betyg.
             result.Low = double.MaxValue;// skapar variabel för att hitta lägsta betyg.
-            
-            foreach (var grade in grades)
+
+
+            for (int index = 0; index < grades.Count; index++)
             {
-                result.Low = Math.Min(grade, result.Low);
-                result.High = Math.Max(grade, result.High);
-                result.Average += grade; 
+                result.Low = Math.Min(grades[index], result.Low);
+                result.High = Math.Max(grades[index], result.High);
+                result.Average += grades[index];
             }
+
+
             result.Average /= grades.Count; //medelvärdet av betyget.
+
+            switch (result.Average)
+            {
+                case var d when
+                default:
+                    break;
+            }
 
             return result;
         }
 
         public void AddGrade(double grade)
         {
-            grades.Add(grade);
+            if (grade <= 100 || grade >= 0)
+            {
+                grades.Add(grade);
+
+            }
+            else
+            {
+                Console.WriteLine("Invalid value");
+            }
+        }
+
+        public void AddLetterGrade(char letter)//Sätter betyget med bokstäver beroende på resultat
+        {
+            switch (letter)
+            {
+                case 'A':
+                    AddGrade(90);
+                    break;
+
+                case 'B':
+                    AddGrade(80);
+                    break;
+
+                case 'C':
+                    AddGrade(70);
+                    break;
+
+                default:
+                    AddGrade(0);
+                    break;
+            }
         }
     }
 }
