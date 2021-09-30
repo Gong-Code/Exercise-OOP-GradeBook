@@ -35,8 +35,24 @@ namespace GradeBook
 
             switch (result.Average)
             {
-                case var d when
+                case var setGradeLetter when setGradeLetter >= 90.0:
+                    result.Letter = 'A';
+                    break;
+
+                case var setGradeLetter when setGradeLetter >= 80.0:
+                    result.Letter = 'B';
+                    break;
+
+                case var setGradeLetter when setGradeLetter >= 70.0:
+                    result.Letter = 'C';
+                    break;
+
+                case var setGradeLetter when setGradeLetter >= 60.0:
+                    result.Letter = 'D';
+                    break;
+                
                 default:
+                    result.Letter = 'F';
                     break;
             }
 
@@ -48,11 +64,10 @@ namespace GradeBook
             if (grade <= 100 || grade >= 0)
             {
                 grades.Add(grade);
-
             }
             else
             {
-                Console.WriteLine("Invalid value");
+                throw new ArgumentException($"Invalid {nameof(grade)}");
             }
         }
 
